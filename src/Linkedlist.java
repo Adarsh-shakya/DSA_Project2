@@ -7,154 +7,63 @@ class Node
 }
 public class Linkedlist
 {
-    Node start;
-    public Linkedlist()
+    Node head;
+    int len;
+    public void insert(int data)
     {
-        start=null;
-    }
-    public void insert()
-    {
-        Scanner sca =new Scanner(System.in);
-        System.out.println("Enter the data : ");
         Node nn=new Node();
-        nn.data=sca.nextInt();
-        nn.next=null;
-
-        if(start==null)
+        nn.data=data;
+        len++;
+        if(head==null)
         {
-            start=nn;
+            head=nn;
         }
         else
         {
-            Node current=start;
+            Node current=head;
             while (current.next!=null)
             {
                 current=current.next;
             }
             current.next=nn;
         }
-        System.out.println("data inserted..");
-    }
-
-    public void delete()
-    {
-        if(start==null)
-        {
-            System.out.println("List is empty");
-        }
-        else
-        {
-            System.out.println("delete element-->"+start.data);
-            if(start.next==null)
-            {
-                start=null;
-            }
-            else
-            {
-                start=start.next;
-            }
-        }
     }
     public void traverse()
     {
-        if(start==null) {
-            System.out.println("List is empty");
-        }
-        else
+        Node current=head;
+        if(head==null)
         {
-            Node current;
-            for (current=start;current!=null;current=current.next)
+            System.out.println("List is Empty.");
+        }
+        else{
+            while (current!=null)
             {
-                System.out.print(" "+current.data);
+                System.out.print(current.data+" ");
+                current=current.next;
             }
+            System.out.println(len);
         }
     }
-
-    public static void main(String[] args) {
+    public int getMid()
+    {
+        Node current=head;
+        int i=1;
+        while(i<(len/2)+1)
+        {
+            i++;
+            current=current.next;
+        }
+        return current.data;
+    }
+    public static void main(String []args)
+    {
         Linkedlist obj=new Linkedlist();
-        while (true)
-        {
-            System.out.println("\nPress 1 for insert ");
-            System.out.println("Press 2 for delete ");
-            System.out.println("Press 3 for traverse ");
-            System.out.println("Press 4 for Exit  ");
-            System.out.println("Press 5 for insertAtStart");
-            System.out.println("Press 6 for insertAtPosition");
-
-            System.out.println("Enter your choice : ");
-            Scanner sca=new Scanner(System.in);
-            int choice=sca.nextInt();
-
-            switch(choice)
-            {
-                case 1:
-                {
-                    obj.insert();
-                    break;
-                }
-                case 2:
-                {
-                    obj.delete();
-                    break;
-                }
-                case 3:
-                {
-                    obj.traverse();
-                    break;
-                }
-                case 4:
-                {
-                    System.exit(0);
-                    break;
-                }
-                case 5:
-                {
-                    obj.insertAtStart();
-                    break;
-                }
-                case 6:
-                {
-                    obj.insertAtPosition();
-                    break;
-                }
-                default:
-                {
-                    System.out.println("...Wrong choice..");
-                }
-            }
-        }
-    }
-
-    public void insertAtPosition() {
-        Scanner sca=new Scanner(System.in);
-        System.out.println("Enter the data: " );
-        Node nn=new Node();
-        nn.data=sca.nextInt();
-        System.out.println("Enter the position: ");
-        int pos=sca.nextInt();
-        Node temp=start;
-        for(int i=1;i<pos-1;i++)
-        {
-            temp=temp.next;
-        }
-        nn.next=temp.next;
-        temp.next=nn;
-        System.out.println("Data inserted");
-    }
-
-    public void insertAtStart() {
-        System.out.println("Enter the data: ");
-        Scanner sca=new Scanner(System.in);
-        Node nn=new Node();
-        nn.data=sca.nextInt();
-        if(start==null)
-        {
-            start=nn;
-        }
-        else {
-            nn.next=start;
-            start=nn;
-        }
-        System.out.println("Data inserted");
+        obj.insert(2);
+        obj.insert(3);
+        obj.insert(4);
+        obj.insert(5);
+        obj.insert(6);
+        System.out.println(obj.getMid());
+        obj.traverse();
     }
 }
